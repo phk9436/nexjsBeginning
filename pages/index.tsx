@@ -1,13 +1,12 @@
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 
 function index() {
   return (
     <>
-    <Navbar/>
+    <Navbar />
     <div>index</div>
     </>
-    
-  )
+  );
 }
 
-export default index
+export default index;
