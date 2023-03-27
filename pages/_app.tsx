@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Navbar from "../components/Navbar";
+import Layout from "../components/Layout";
 import "../styles/globals.css";
 
 interface Iprops {
@@ -9,10 +9,9 @@ interface Iprops {
 
 function App({ Component, pageProps }: Iprops) {
   return (
-    <>
-      <Navbar />
+    <Layout>
       <Component {...pageProps} />
-    </>
+    </Layout>
   );
 }
 
