@@ -14,6 +14,12 @@ const nextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [{
+      source: "/api/movies/popular",
+      destination: `${BASE_PATH}/movie/popular?api_key=${API_KEY}`
+    }];
+  },
 };
 
 module.exports = nextConfig;
