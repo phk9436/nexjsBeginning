@@ -13,31 +13,13 @@ interface Iporps {
 function Home({ results }: Iporps) {
   const router = useRouter();
   const onClick = (id: string, title: string) => {
-    router.push(
-      {
-        pathname: `/movies/${id}`,
-        query: {
-          id,
-          title,
-        },
-      },
-      `/movies/${id}`
-    );
+    router.push(`/movies/${title}/${id}`);
   };
   return (
     <div>
       {results.map((e) => (
         <div key={e.id} style={{ cursor: "pointer" }}>
-          <Link
-            href={{
-              pathname: `/movies/${e.id}`,
-              query: {
-                id: e.id,
-                title: e.title,
-              },
-            }}
-            as={`/movies/${e.id}`}
-          >
+          <Link href={`/movies/${e.title}/${e.id}`}>
             <a>
               <h4>{e.title}</h4>
             </a>
