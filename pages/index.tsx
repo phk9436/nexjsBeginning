@@ -2,26 +2,63 @@ import { useEffect, useState } from "react";
 import { getMovies } from "../components/Api";
 import { useQuery } from "@tanstack/react-query";
 import { ImovieData } from "../components/Api";
+import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-function Home() {
-  const [movies, setMovies] = useState<ImovieData[]>([]);
-  const { isLoading, data } = useQuery(["movies", "popular"], getMovies);
-  console.log(movies);
+interface Iporps {
+  results: ImovieData[];
+}
 
-  useEffect(() => {
-    data && setMovies(data.data.results);
-  }, [isLoading]);
+function Home({ results }: Iporps) {
+  const router = useRouter();
+  const onClick = (id: string, title: string) => {
+    router.push(
+      {
+        pathname: `/movies/${id}`,
+        query: {
+          id,
+          title,
+        },
+      },
+      `/movies/${id}`
+    );
+  };
   return (
     <div>
-      {isLoading
-        ? "Loading..."
-        : movies.map((e) => (
-            <div key={e.id}>
+      {results.map((e) => (
+        <div key={e.id} style={{ cursor: "pointer" }}>
+          <Link
+            href={{
+              pathname: `/movies/${e.id}`,
+              query: {
+                id: e.id,
+                title: e.title,
+              },
+            }}
+            as={`/movies/${e.id}`}
+          >
+            <a>
               <h4>{e.title}</h4>
-            </div>
-          ))}
+            </a>
+          </Link>
+          <img
+            src="/vercel.svg"
+            alt=""
+            style={{ width: "50px" }}
+            onClick={() => onClick(`${e.id}`, e.title)}
+          />
+        </div>
+      ))}
     </div>
   );
 }
 
 export default Home;
+
+export const getServerSideProps = async () => {
+  const {
+    data: { results },
+  } = await axios.get("http://localhost:3000/api/movies/popular");
+  return { props: { results } };
+};
