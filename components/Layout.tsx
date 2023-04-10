@@ -8,9 +8,8 @@ interface Iprops {
 }
 function Layout({ children }: Iprops) {
   const router = useRouter();
-  const path = router.pathname;
-  const pathIndex = path.indexOf("/", 2) === -1 ? path.length : path.indexOf("/", 2);
-  const title = path.substring(0, pathIndex).replace("/", "");
+  const title = router.pathname.replace("/", "");
+
   return (
     <>
       <Seo title={title || "Home"} />

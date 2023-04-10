@@ -15,16 +15,10 @@ const nextConfig = {
     ];
   },
   async rewrites() {
-    return [
-      {
-        source: "/api/movies/popular",
-        destination: `${BASE_PATH}/movie/popular?api_key=${API_KEY}`,
-      },
-      {
-        source: "/api/movies/:id",
-        destination: `${BASE_PATH}/movie/:id?api_key=${API_KEY}`,
-      },
-    ];
+    return [{
+      source: "/api/movies/popular",
+      destination: `${BASE_PATH}/movie/popular?api_key=${API_KEY}`
+    }];
   },
 };
 
