@@ -2,15 +2,11 @@ import React, { Component } from "react";
 import Layout from "../components/Layout";
 import "../styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-interface Iprops {
-  Component: Function;
-  pageProps: Object;
-}
+import { AppProps } from 'next/dist/shared/lib/router/router';
 
 const queryClient = new QueryClient();
 
-function App({ Component, pageProps }: Iprops) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Layout>

@@ -5,7 +5,7 @@ import { InferGetServerSidePropsType } from 'next'
 
 function Detail({ params }:InferGetServerSidePropsType<typeof getServerSideProps>) {
   console.log(params.params);
-  const [title, id] = params.params || [];
+  const [title, id] = params.params //|| []; (csr일때만)
   return (
     <div>
       <h4>{title}</h4>
